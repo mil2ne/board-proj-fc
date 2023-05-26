@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: board_db
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: "board"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      TZ: 'Asia/Seoul'
+    ports:
+      - "3306:3306"
+    command:
+      - "mysqld"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+
+
+
+#  create user 'mil2ne'@'localhost' identified by 'password';
+#  select * from mysql.user;
+#
+#  show grants for 'mil2ne'@'localhost';
+#
+#  grant all on `board`.* to 'mil2ne'@'localhost' with grant option;
+#
+#  flush privileges;
