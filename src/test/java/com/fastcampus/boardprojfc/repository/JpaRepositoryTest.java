@@ -2,6 +2,7 @@ package com.fastcampus.boardprojfc.repository;
 
 import com.fastcampus.boardprojfc.config.JpaConfig;
 import com.fastcampus.boardprojfc.domain.Article;
+import com.fastcampus.boardprojfc.domain.UserAccount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,14 @@ class JpaRepositoryTest {
 
     private final ArticleRepository articleRepository;
     private final ArticleCommentRepository articleCommentRepository;
+    private final UserAccountRepository userAccountRepository;
 
     public JpaRepositoryTest(@Autowired ArticleRepository articleRepository,
-                             @Autowired ArticleCommentRepository articleCommentRepository) {
+                             @Autowired ArticleCommentRepository articleCommentRepository,
+                             @Autowired UserAccountRepository userAccountRepository) {
         this.articleRepository = articleRepository;
         this.articleCommentRepository = articleCommentRepository;
+        this.userAccountRepository = userAccountRepository;
     }
 
     @DisplayName("select test")
@@ -45,7 +49,8 @@ class JpaRepositoryTest {
     public void givenTestData_whenInserting_thenWorksFine() {
         // Given
         long prevCount = articleRepository.count();
-        Article article = Article.of("new article", "new contnet", "#spring");
+        UserAccount userAccount = userAccountRepository.save(UserAccount.of("celee", "pw", null, null, null));
+        Article article = Article.of(userAccount,"new article", "new contnet", "#spring");
 
         // When
         articleRepository.save(article);
