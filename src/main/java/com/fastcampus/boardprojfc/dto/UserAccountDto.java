@@ -5,7 +5,6 @@ import com.fastcampus.boardprojfc.domain.UserAccount;
 import java.time.LocalDateTime;
 
 public record UserAccountDto(
-        Long id,
         String userId,
         String userPassword,
         String email,
@@ -16,7 +15,11 @@ public record UserAccountDto(
         LocalDateTime modifiedAt,
         String modifiedBy
 ) {
-    public static UserAccountDto of(Long id,
+    public static UserAccountDto of(String userId, String userPassword, String email, String nickname, String memo) {
+        return new UserAccountDto(userId, userPassword, email, nickname, memo,null,null,null,null);
+    }
+
+    public static UserAccountDto of(
                                     String userId,
                                     String userPassword,
                                     String email,
@@ -26,7 +29,7 @@ public record UserAccountDto(
                                     String createdBy,
                                     LocalDateTime modifiedAt,
                                     String modifiedBy) {
-        return new UserAccountDto(id,
+        return new UserAccountDto(
                 userId,
                 userPassword,
                 email,
@@ -40,7 +43,6 @@ public record UserAccountDto(
 
     public static UserAccountDto from(UserAccount entity) {
         return new UserAccountDto(
-                entity.getId(),
                 entity.getUserId(),
                 entity.getUserPassword(),
                 entity.getEmail(),
