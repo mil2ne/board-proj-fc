@@ -78,7 +78,7 @@ public class ArticleController {
     public String articleForm(ModelMap map) {
         map.addAttribute("formStatus", FormStatus.CREATE);
 
-        return "article/form";
+        return "articles/form";
     }
 
     @PostMapping("/form")
