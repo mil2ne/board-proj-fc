@@ -88,11 +88,7 @@ public class ArticleController {
                         "asdf1234",
                         "uno@gmail.com",
                         "Uno",
-                        "memo",
-                        null,
-                        null,
-                        null,
-                        null)
+                        "memo")
         ));
 
         return "redirect:/articles";
@@ -111,7 +107,7 @@ public class ArticleController {
     @PostMapping("/{articleId}/form")
     public String updateArticle(@PathVariable Long articleId, ArticleRequest articleRequest) {
         articleService.updateArticle(articleId, articleRequest.toDto(UserAccountDto.of(
-                "uno", "asdf1234", "uno@gmail.com","Uno","memo",null,null,null,null
+                "uno", "asdf1234", "uno@gmail.com","Uno","memo"
         )));
 
         return "redirect:/articles/" + articleId;
