@@ -4,6 +4,7 @@ import com.fastcampus.boardprojfc.domain.constant.FormStatus;
 import com.fastcampus.boardprojfc.domain.constant.SearchType;
 import com.fastcampus.boardprojfc.dto.UserAccountDto;
 import com.fastcampus.boardprojfc.dto.request.ArticleRequest;
+import com.fastcampus.boardprojfc.dto.security.BoardPrincipal;
 import com.fastcampus.boardprojfc.response.ArticleResponse;
 import com.fastcampus.boardprojfc.response.ArticleWithCommentsResponse;
 import com.fastcampus.boardprojfc.service.ArticleService;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -82,13 +84,11 @@ public class ArticleController {
     }
 
     @PostMapping("/form")
-    public String postNewArticle(ArticleRequest articleRequest) {
+    public String postNewArticle(
+            @AuthenticationPrincipal BoardPrincipal boardPrincipal,
+            ArticleRequest articleRequest) {
         articleService.saveArticle(articleRequest.toDto(
-                UserAccountDto.of("uno",
-                        "asdf1234",
-                        "uno@gmail.com",
-                        "Uno",
-                        "memo")
+                boardPrincipal.toDto()
         ));
 
         return "redirect:/articles";
@@ -105,17 +105,22 @@ public class ArticleController {
     }
 
     @PostMapping("/{articleId}/form")
-    public String updateArticle(@PathVariable Long articleId, ArticleRequest articleRequest) {
-        articleService.updateArticle(articleId, articleRequest.toDto(UserAccountDto.of(
-                "uno", "asdf1234", "uno@gmail.com","Uno","memo"
-        )));
+    public String updateArticle(
+            @PathVariable Long articleId,
+            @AuthenticationPrincipal BoardPrincipal boardPrincipal,
+            ArticleRequest articleRequest
+    ) {
+        articleService.updateArticle(articleId, articleRequest.toDto(boardPrincipal.toDto()));
 
         return "redirect:/articles/" + articleId;
     }
 
     @PostMapping("/{articleId}/delete")
-    public String deleteArticle(@PathVariable Long articleId) {
-        articleService.deleteArticle(articleId);
+    public String deleteArticle(
+            @PathVariable Long articleId,
+            @AuthenticationPrincipal BoardPrincipal boardPrincipal
+            ) {
+        articleService.deleteArticle(articleId, boardPrincipal.getUsername());
 
         return "redirect:/articles";
     }
