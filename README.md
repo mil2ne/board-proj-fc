@@ -35,6 +35,5 @@ Spring Boot
 * Heroku
 
 ## 데모 페이지
-
-(작성 중)
+* https://project-board-celee-d2ea954eb890.herokuapp.com/
 
