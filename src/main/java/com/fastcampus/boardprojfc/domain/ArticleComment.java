@@ -16,18 +16,18 @@ import java.util.Objects;
 })
 @Entity
 public class ArticleComment extends AuditingFields {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Setter
     @ManyToOne(optional = false)
-    private Article article; // 게시글 (id)
-
+    private Article article; // 게시글 (ID)
     @Setter
     @ManyToOne(optional = false)
     @JoinColumn(name = "userId")
-    private UserAccount userAccount;
+    private UserAccount userAccount; // 유저 정보 (ID)
 
     @Setter
     @Column(nullable = false, length = 500)
@@ -50,13 +50,13 @@ public class ArticleComment extends AuditingFields {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ArticleComment that = (ArticleComment) o;
-        return id.equals(that.id);
+        if (!(o instanceof ArticleComment that)) return false;
+        return this.getId() != null && this.getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.getId());
     }
+
 }

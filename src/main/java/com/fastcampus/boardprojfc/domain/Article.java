@@ -32,10 +32,9 @@ public class Article extends AuditingFields {
     @Setter
     @Column(nullable = false)
     private String title; // 제목
-
     @Setter
     @Column(nullable = false, length = 10000)
-    private String content; // 내용
+    private String content; // 본문
 
     @Setter
     private String hashtag; // 해시태그
@@ -63,13 +62,13 @@ public class Article extends AuditingFields {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Article article = (Article) o;
-        return id.equals(article.id);
+        if (!(o instanceof Article that)) return false;
+        return this.getId() != null && this.getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.getId());
     }
+
 }
