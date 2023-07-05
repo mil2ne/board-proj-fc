@@ -2,14 +2,12 @@ package com.fastcampus.boardprojfc.controller;
 
 import com.fastcampus.boardprojfc.domain.constant.FormStatus;
 import com.fastcampus.boardprojfc.domain.constant.SearchType;
-import com.fastcampus.boardprojfc.dto.UserAccountDto;
 import com.fastcampus.boardprojfc.dto.request.ArticleRequest;
 import com.fastcampus.boardprojfc.dto.security.BoardPrincipal;
-import com.fastcampus.boardprojfc.response.ArticleResponse;
-import com.fastcampus.boardprojfc.response.ArticleWithCommentsResponse;
+import com.fastcampus.boardprojfc.dto.response.ArticleResponse;
+import com.fastcampus.boardprojfc.dto.response.ArticleWithCommentsResponse;
 import com.fastcampus.boardprojfc.service.ArticleService;
 import com.fastcampus.boardprojfc.service.PaginationService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
