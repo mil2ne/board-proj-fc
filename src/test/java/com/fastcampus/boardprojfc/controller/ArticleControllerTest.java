@@ -61,7 +61,7 @@ class ArticleControllerTest {
         this.formDataEncoder = formDataEncoder;
     }
 
-    @Disabled("구현 중")
+//    @Disabled("구현 중")
     @DisplayName("[view][GET] 게시글 리스트 (게시판) 페이지 - 정상 호출")
     @Test
     void givenNothing_whenRequestingArticlesView_thenReturnsArticlesView() throws Exception {
@@ -149,7 +149,7 @@ class ArticleControllerTest {
         then(articleService).shouldHaveNoInteractions();
     }
 
-    @Disabled("구현 중")
+//    @Disabled("구현 중")
     @WithMockUser
     @DisplayName("[view][GET] 게시글 페이지 - 정상 호출, 인증된 사용자")
     @Test
